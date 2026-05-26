@@ -1,0 +1,23 @@
+# Ambientes Virtuais (para testes locais)
+venv/
+env/
+.venv/
+
+# Caches do Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+
+# Configurações de IDEs (VSCode, PyCharm, etc)
+.vscode/
+.idea/
+*.swp
+
+# Variáveis de ambiente
+.env
+
+# Sistema Operacional
+.DS_Store
+Thumbs.db

@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:15-alpine
+    container_name: postgres_db
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: adminpassword
+      POSTGRES_DB: reservas_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      # Executa o script SQL na primeira vez que o banco subir
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+
+  backend:
+    build: ./server
+    container_name: udp_server
+    environment:
+      DB_HOST: db
+      DB_NAME: reservas_db
+      DB_USER: admin
+      DB_PASSWORD: adminpassword
+    ports:
+      - "5000:5000/udp" # Expõe a porta 5000 via UDP
+    depends_on:
+      - db
+
+volumes:
+  pgdata:

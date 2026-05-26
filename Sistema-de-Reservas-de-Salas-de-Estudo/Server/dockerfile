@@ -1,0 +1,14 @@
+# Usa uma imagem oficial e leve do Python
+FROM python:3.9-slim
+
+# Define o diretório de trabalho dentro do container
+WORKDIR /app
+
+# Copia os arquivos da pasta server para dentro do container
+COPY . /app
+
+# Instala as dependências (será preciso o psycopg2 para o Postgres)
+RUN pip install --no-cache-dir -r requirements.txt
+
+# O comando que será executado quando o container iniciar
+CMD ["python", "servidor.py"]
